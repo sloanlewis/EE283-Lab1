@@ -3,8 +3,8 @@ title: "EE283 Lab1"
 output: html_document
 ---
 
-# Chapter 7 #
-## 1 Create a small tibble ##
+# Chapter 7
+## 1 Create a small tibble
 
 ```
 tb <- tibble(
@@ -15,9 +15,9 @@ tb <- tibble(
 tb
 ```
 
-## 2 Do exercises 1,2,4,5,6 from this chapter. ##
-### 1 How can you tell if an object is a tibble? ###
-*** A tibble has a header with the dimensions of the tibble. ***
+## 2 Do exercises 1,2,4,5,6 from this chapter. 
+### 1 How can you tell if an object is a tibble? 
+_A tibble has a header with the dimensions of the tibble._
 
 ### 2 Compare and contrast the following operations on a data.frame and equivalent tibble. What is different? Why might the default data frame behaviours cause you frustration?
 
