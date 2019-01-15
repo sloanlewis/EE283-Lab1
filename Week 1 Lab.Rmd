@@ -1,0 +1,148 @@
+---
+title: "EE283 Lab1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Chapter 7
+##1 Create a small tibble
+tb <- tibble(
+  x = c("a","b","c"), 
+  food = c("pizza", "donuts", "fries"), 
+  amount = 1:3
+)
+tb
+
+##2 Do exercises 1,2,4,5,6 from this chapter.
+###1 How can you tell if an object is a tibble?
+A tibble has a header with the dimensions of the tibble.
+
+###2 Compare and contrast the following operations on a data.frame and equivalent tibble. What is different? Why might the default data frame behaviours cause you frustration?
+
+```
+df <- data.frame(abc = 1, xyz = "a")
+df$x
+df[, "xyz"]
+df[, c("abc", "xyz")]
+```
+
+```
+tbtest <- as.tibble(df)
+tbtest$x
+tbtest[, "xyz"]
+tbtest[, c("abc", "xyz")]
+```
+
+***When you call df$x  in the data frame, it returns the first column, but when you try it for the tibble tbtest$x it returns an error. It is hard to switch between the data frame and the tibble rules for calling columns in the data.***
+
+###4 Practice referring to non-syntactic names in the following data frame by:
+  *Extracting the variable called 1.
+```
+annoying$"1"
+```
+
+  *Plotting a scatterplot of 1 vs 2.
+
+```
+plot(annoying$"1", annoying$"2")
+```
+
+  *Creating a new column called 3 which is 2 divided by 1.
+
+```
+a <- mutate(annoying, `3` = `2`/`1`)
+```
+
+  *Renaming the columns to one, two and three.
+
+```
+b <- rename(a, "one"=`1`, "two"=`2`, "three"=`3`)
+```
+###5 What does tibble::enframe() do? When might you use it?
+***It converts named atomic vectors or lists to two-column data frames. ***
+
+```
+tibble::enframe(c("pizza"=1, "donuts"=2, "fries"=3))
+```
+
+###6 What option controls how many additional column names are printed at the footer of a tibble?
+***The `n_extra` argument determines the number of extra columns to print information for.***
+
+#Chapter 8
+###1 What function would you use to read a file where fields were separated with “|”?
+
+```
+read_delim(file, delim = "|")
+```
+
+###2 Apart from file, skip, and comment, what other arguments do read_csv() and read_tsv() have in common?
+***col_names, Locale, quote, progress, na, n_max, skip_empty_rows, col_types, quoted_na, trim_ws, guess_max***
+
+###4 Sometimes strings in a CSV file contain commas. To prevent them from causing problems they need to be surrounded by a quoting character, like " or '. By convention, read_csv() assumes that the quoting character will be ", and if you want to change it you’ll need to use read_delim() instead. What arguments do you need to specify to read the following text into a data frame?
+
+```
+"x,y\n1,'a,b'"
+```
+
+```
+x <- "x,y\n1,'a,b'"
+read_delim(x, ",", quote = "'")
+```
+
+#Chapter 9
+###3 Recreate the plot showing change in cases over time using table2 instead of table1. What do you need to do first?
+
+```
+library(tidyverse)
+table2 %>%
+  filter(type == "cases") %>%
+  ggplot(aes(year, count)) +
+  geom_line(aes(group = country), colour = "grey50") +
+  geom_point(aes(colour = country)) +
+  scale_x_continuous(breaks = unique(table2$year)) +
+  ylab("cases")
+
+```
+***Then you can follow what they do for table1***
+
+###2 Why does this code fail?
+
+```
+table4a %>% 
+  gather(1999, 2000, key = "year", value = "cases")
+```
+
+***Without the "'" on either side of the years like this '1999', '2000', tidyverse is recognizing them as column numbers. You need the single quotation to call the column names.***
+
+#Chapter 10
+###1 Add a surrogate key to flights.
+
+```
+flights %>%
+  arrange(year, month, day, sched_dep_time, carrier, flight) %>%
+  mutate(flight_id = row_number())
+```
+
+###2 Add the location of the origin and destination (i.e. the lat and lon) to flights.
+
+```
+airport_locations <- airports %>%
+  select(faa, lat, lon)
+
+flights %>%
+  select(year:day, hour, origin, dest) %>%
+  left_join(
+    airport_locations,
+    by = c("origin" = "faa")
+  ) %>%
+  left_join(
+    airport_locations,
+    by = c("dest" = "faa")
+  )
+```
+
+
+
