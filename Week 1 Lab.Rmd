@@ -17,7 +17,7 @@ tb
 
 ## 2 Do exercises 1,2,4,5,6 from this chapter. 
 ### 1 How can you tell if an object is a tibble? 
-_A tibble has a header with the dimensions of the tibble._
+**A tibble has a header with the dimensions of the tibble.**
 
 ### 2 Compare and contrast the following operations on a data.frame and equivalent tibble. What is different? Why might the default data frame behaviours cause you frustration?
 
@@ -35,7 +35,7 @@ tbtest[, "xyz"]
 tbtest[, c("abc", "xyz")]
 ```
 
-***When you call df$x  in the data frame, it returns the first column, but when you try it for the tibble tbtest$x it returns an error. It is hard to switch between the data frame and the tibble rules for calling columns in the data.***
+**When you call df$x  in the data frame, it returns the first column, but when you try it for the tibble tbtest$x it returns an error. It is hard to switch between the data frame and the tibble rules for calling columns in the data.**
 
 ### 4 Practice referring to non-syntactic names in the following data frame by:
   *Extracting the variable called 1.
@@ -68,7 +68,7 @@ tibble::enframe(c("pizza"=1, "donuts"=2, "fries"=3))
 ```
 
 ### 6 What option controls how many additional column names are printed at the footer of a tibble?
-***The `n_extra` argument determines the number of extra columns to print information for.***
+**The `n_extra` argument determines the number of extra columns to print information for.**
 
 # Chapter 8
 ### 1 What function would you use to read a file where fields were separated with “|”?
@@ -78,7 +78,7 @@ read_delim(file, delim = "|")
 ```
 
 ### 2 Apart from file, skip, and comment, what other arguments do read_csv() and read_tsv() have in common?
-***col_names, Locale, quote, progress, na, n_max, skip_empty_rows, col_types, quoted_na, trim_ws, guess_max***
+**col_names, Locale, quote, progress, na, n_max, skip_empty_rows, col_types, quoted_na, trim_ws, guess_max**
 
 ### 4 Sometimes strings in a CSV file contain commas. To prevent them from causing problems they need to be surrounded by a quoting character, like " or '. By convention, read_csv() assumes that the quoting character will be ", and if you want to change it you’ll need to use read_delim() instead. What arguments do you need to specify to read the following text into a data frame?
 
@@ -105,7 +105,7 @@ table2 %>%
   ylab("cases")
 
 ```
-***Then you can follow what they do for table1***
+**Then you can follow what they do for table1**
 
 ### 2 Why does this code fail?
 
@@ -114,7 +114,7 @@ table4a %>%
   gather(1999, 2000, key = "year", value = "cases")
 ```
 
-***Without the "'" on either side of the years like this '1999', '2000', tidyverse is recognizing them as column numbers. You need the single quotation to call the column names.***
+**Without the "'" on either side of the years like this '1999', '2000', tidyverse is recognizing them as column numbers. You need the single quotation to call the column names.**
 
 # Chapter 10
 ### 1 Add a surrogate key to flights.
