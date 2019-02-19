@@ -1,0 +1,5 @@
+##Re-organizing ATAC, DNA, and RNAseq raw data files##
+
+ATACseq and DNAseq by sample name
+RNAseq perhaps left as is, and map sample names from within DESeq2
+
