@@ -1,5 +1,32 @@
 ##Re-organizing ATAC, DNA, and RNAseq raw data files##
 
-ATACseq and DNAseq by sample name
-RNAseq perhaps left as is, and map sample names from within DESeq2
+#ATACseq and DNAseq by sample name
+#RNAseq perhaps left as is, and map sample names from within DESeq2
 
+#!/bin/bash
+#$ -N rename
+#$ -q bio
+#$ -m beas
+
+cd /pub/sloanal/Bioinformatics_Course
+for sample in {4,5,6,7};do
+mkdir -p sample_A"$sample"/{DNA,ATAC}
+done
+
+cd ATACseq/
+## Rename in the ATAC folder
+## Read 1
+for i in $(ls *R1.fq.gz); do 
+mv $i $(grep $(echo $i | cut -d'_' -f5) README.ATACseq.txt | awk '{print $2"_"$4"_"$3"_""R1"".fq.gz"}'); 
+done
+
+## Read 2
+for i in $(ls *R2.fq.gz); do 
+mv $i $(grep $(echo $i | cut -d'_' -f5) README.ATACseq.txt | awk '{print $2"_"$4"_"$3"_""R2"".fq.gz"}'); 
+done
+
+## move ATAC samples to their sample specific folder
+for i in $(ls A*_*_*_*.fq.gz); do 
+g=$(echo $i | cut -d'_' -f1); 
+mv $i /pub/sloanal/Bioinformatics_Course/sample_"$g"/ATAC/"$i"; 
+done
