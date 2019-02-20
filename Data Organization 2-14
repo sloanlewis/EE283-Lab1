@@ -30,3 +30,17 @@ for i in $(ls A*_*_*_*.fq.gz); do
 g=$(echo $i | cut -d'_' -f1); 
 mv $i /bio/sloanal/Bioinformatics_Course/sample_"$g"/ATAC/"$i"; 
 done
+
+## Rename the DNAseq folder
+cd ./DNAseq
+for file in *.fq.gz ; do mv $file ${file//ADL06/A4} ; done
+for file in *.fq.gz ; do mv $file ${file//ADL09/A5} ; done
+for file in *.fq.gz ; do mv $file ${file//ADL10/A6} ; done
+for file in *.fq.gz ; do mv $file ${file//ADL14/A7} ; done
+
+## move the DNAseq samples to their specific folder
+mv A4* /bio/sloanal/Bioinformatics_Course/sample_A4/DNA/
+mv A5* /bio/sloanal/Bioinformatics_Course/sample_A5/DNA/
+mv A6* /bio/sloanal/Bioinformatics_Course/sample_A6/DNA/
+mv A7* /bio/sloanal/Bioinformatics_Course/sample_A7/DNA/
+
