@@ -8,7 +8,7 @@
 #$ -q bio
 #$ -m beas
 
-cd /pub/sloanal/Bioinformatics_Course
+cd /bio/sloanal/Bioinformatics_Course
 for sample in {4,5,6,7};do
 mkdir -p sample_A"$sample"/{DNA,ATAC}
 done
@@ -28,5 +28,5 @@ done
 ## move ATAC samples to their sample specific folder
 for i in $(ls A*_*_*_*.fq.gz); do 
 g=$(echo $i | cut -d'_' -f1); 
-mv $i /pub/sloanal/Bioinformatics_Course/sample_"$g"/ATAC/"$i"; 
+mv $i /bio/sloanal/Bioinformatics_Course/sample_"$g"/ATAC/"$i"; 
 done
